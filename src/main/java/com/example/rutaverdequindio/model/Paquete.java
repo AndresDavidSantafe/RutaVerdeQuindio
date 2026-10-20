@@ -79,10 +79,6 @@ public class Paquete implements Producto {
         this.codigo = codigo;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -110,10 +106,13 @@ public class Paquete implements Producto {
         }
         return horas;
     }
-
-    public String codigo() { return codigo; }
+    @Override
+    public String codigo() {
+        return codigo; }
+    @Override
     public String nombre() { return nombre; }
 
+    @Override
     public List<Actividad> actividades() {
         List<Actividad> lista = new ArrayList<>();
         for (Producto producto : contenido) { lista.addAll(producto.actividades()); }

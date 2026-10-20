@@ -1,14 +1,60 @@
 package com.example.rutaverdequindio.model;
 
-public class Actividad {
+import java.util.Collections;
+import java.util.List;
+
+public class Actividad implements Producto {
     private String codigo;
     private String nombre;
     private String municipio;
-    private double duracion;
+    private double duracion; // en horas
     private double precioxpersona;
     private int cupomaximo;
     private Dificultad dificultad;
     private Estado estado;
+
+    public Actividad(String codigo, String nombre, String municipio, double duracion, double precioxpersona, int cupomaximo, Dificultad dificultad, Estado estado) {
+        if (precioxpersona < 0) {
+            throw new IllegalArgumentException("El precio por persona no puede ser negativo.");
+        }
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.municipio = municipio;
+        this.duracion = duracion;
+        this.precioxpersona = precioxpersona;
+        this.cupomaximo = cupomaximo;
+        this.dificultad = dificultad;
+        this.estado = estado;
+    }
+
+
+    @Override
+    public String codigo() {
+        return codigo;
+    }
+
+    @Override
+    public String nombre() {
+        return nombre;
+    }
+
+    @Override
+    public double precioPersona() {
+        return precioxpersona;
+    }
+
+    @Override
+    public int duracion() {
+
+        return (int) Math.round(duracion);
+    }
+
+    @Override
+    public List<Actividad> actividades() {
+
+        return Collections.singletonList(this);
+    }
+
 
     public String getCodigo() {
         return codigo;
@@ -47,6 +93,9 @@ public class Actividad {
     }
 
     public void setPrecioxpersona(double precioxpersona) {
+        if (precioxpersona < 0) {
+            throw new IllegalArgumentException("El precio por persona no puede ser negativo.");
+        }
         this.precioxpersona = precioxpersona;
     }
 
@@ -74,5 +123,8 @@ public class Actividad {
         this.estado = estado;
     }
 
-
+    @Override
+    public String toString() {
+        return codigo + " - " + nombre + " ($" + precioxpersona + ")";
+    }
 }
