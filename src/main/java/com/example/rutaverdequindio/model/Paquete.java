@@ -110,9 +110,14 @@ public class Paquete implements Producto {
         }
         return horas;
     }
-
-    public String codigo() { return codigo; }
-    public String nombre() { return nombre; }
+    @Override
+    public String codigo() {
+        return codigo;
+    }
+    @Override
+    public String nombre() {
+        return nombre;
+    }
 
     public List<Actividad> actividades() {
         List<Actividad> lista = new ArrayList<>();

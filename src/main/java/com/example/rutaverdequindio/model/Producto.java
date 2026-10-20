@@ -10,6 +10,4 @@ public interface Producto {
     double precioPersona();
     int duracion();
     List<Actividad> actividades();
-
-
 }
