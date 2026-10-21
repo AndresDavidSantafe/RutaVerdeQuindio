@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.rutaverdequindio.controller.PaquetesController" spacing="12" style="-fx-padding: 18;">
+    <Label text="Crear paquetes y agregar actividades o subpaquetes"
+           style="-fx-font-size: 15px; -fx-font-weight: bold;"/>
+    <HBox spacing="9" alignment="CENTER_LEFT">
+        <TextField fx:id="codigo" promptText="Código del paquete" prefWidth="175"/>
+        <TextField fx:id="nombre" promptText="Nombre del paquete" prefWidth="175"/>
+        <TextField fx:id="descuento" promptText="Descuento 0 a 20 %" prefWidth="175"/>
+        <Button text="Crear paquete" onAction="#crear"/>
+    </HBox>
+    <HBox spacing="9" alignment="CENTER_LEFT">
+        <Label text="Paquete destino:"/>
+        <ComboBox fx:id="paquetes" prefWidth="240" onAction="#mostrar"/>
+        <Label text="Producto para incluir:"/>
+        <ComboBox fx:id="productos" prefWidth="240"/>
+    </HBox>
+    <HBox spacing="9" alignment="CENTER_LEFT">
+        <Button text="Agregar al paquete" onAction="#agregar"/>
+        <Button text="Eliminar paquete" onAction="#eliminar"/>
+        <Button text="Actualizar listas" onAction="#actualizar"/>
+    </HBox>
+    <TextArea fx:id="detalle" editable="false" wrapText="true" VBox.vgrow="ALWAYS"/>
+</VBox>

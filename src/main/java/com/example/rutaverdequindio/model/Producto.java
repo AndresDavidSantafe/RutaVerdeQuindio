@@ -1,13 +1,16 @@
 package com.example.rutaverdequindio.model;
 
-import java.math.BigDecimal;
-import java.util.List;
+import java.util.ArrayList;
 
 public interface Producto {
 
     String codigo();
+
     String nombre();
+
     double precioPersona();
+
     int duracion();
-    List<Actividad> actividades();
+
+    ArrayList<Actividad> actividades();
 }

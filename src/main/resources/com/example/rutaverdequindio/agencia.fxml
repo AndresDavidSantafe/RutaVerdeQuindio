@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.rutaverdequindio.controller.AgenciaController" spacing="12" style="-fx-padding: 18;">
+    <Label text="Datos comerciales de RutaVerde Quindío" style="-fx-font-size: 15px; -fx-font-weight: bold;"/>
+    <HBox spacing="9" alignment="CENTER_LEFT">
+        <TextField fx:id="nombre" promptText="Nombre comercial" prefWidth="175"/>
+        <TextField fx:id="nit" promptText="NIT" prefWidth="175"/>
+        <TextField fx:id="rnt" promptText="RNT" prefWidth="175"/>
+    </HBox>
+    <HBox spacing="9" alignment="CENTER_LEFT">
+        <TextField fx:id="direccion" promptText="Dirección" prefWidth="175"/>
+        <TextField fx:id="telefono" promptText="Teléfono" prefWidth="175"/>
+        <TextField fx:id="email" promptText="Correo electrónico" prefWidth="175"/>
+    </HBox>
+    <HBox spacing="9" alignment="CENTER_LEFT">
+        <TextField fx:id="web" promptText="Página web" prefWidth="175"/>
+    </HBox>
+    <HBox spacing="9" alignment="CENTER_LEFT">
+        <Button text="Guardar datos" onAction="#guardar"/>
+    </HBox>
+    <Label text="Complete el RNT real antes de emitir los vouchers definitivos."/>
+</VBox>

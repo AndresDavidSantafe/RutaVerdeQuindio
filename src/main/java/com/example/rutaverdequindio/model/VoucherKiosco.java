@@ -1,8 +1,8 @@
 package com.example.rutaverdequindio.model;
 
 public class VoucherKiosco implements Voucher{
-    @Override
     public String generar(Reserva reserva) {
-        return "Codigo: "+"presentar en la entrada";
+        return "Tiquete RV-" + reserva.getNumero() + " | " + reserva.getProducto().nombre()
+                + " | " + reserva.getFecha() + " | Presentar en la entrada";
     }
 }

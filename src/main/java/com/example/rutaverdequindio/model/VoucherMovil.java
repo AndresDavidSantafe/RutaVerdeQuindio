@@ -1,8 +1,8 @@
 package com.example.rutaverdequindio.model;
 
 public class VoucherMovil implements Voucher{
-    @Override
     public String generar(Reserva reserva) {
-        return "En proceso...";
+        return "RutaVerde #" + reserva.getNumero() + " - " + reserva.getProducto().nombre()
+                + " - " + reserva.getFecha() + " - $" + reserva.getTotal();
     }
 }

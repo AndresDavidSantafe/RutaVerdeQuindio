@@ -9,26 +9,27 @@ public class Paquete implements Producto {
 
     private String codigo;
     private String nombre;
-    private BigDecimal descuento;
-    private List<Producto> contenido = new  ArrayList<>();
+    private double descuento;
+    private ArrayList<Producto> contenido = new ArrayList<>();
 
-    public Paquete(String codigo, String nombre, BigDecimal descuento) {
-        if(descuento.compareTo(new BigDecimal("20")) > 0) throw new IllegalArgumentException("Descuento entre 0 y 20%");
-        this.codigo = codigo;
-        this.nombre = nombre;
+    public Paquete(String codigo, String nombre, double descuento) {
+        if (codigo == null || codigo.trim().isEmpty() || nombre == null || nombre.trim().isEmpty()) {
+            throw new IllegalArgumentException("Ingrese código y nombre del paquete.");
+        }
+        if (descuento < 0 || descuento > 20) {
+            throw new IllegalArgumentException("El descuento debe estar entre 0 y 20.");
+        }
+        this.codigo = codigo.trim();
+        this.nombre = nombre.trim();
         this.descuento = descuento;
     }
 
-    private boolean contienePaquete(Paquete paquete) {
-        if (this == paquete){
-            return true;
-        }
-        for(Producto p : contenido){
-            if(p instanceof Paquete){
-                Paquete subpaquete = (Paquete) p;
-                if(subpaquete.contienePaquete(paquete)){
-                    return true;
-                }
+    public boolean contienePaquete(Paquete buscado) {
+        if (this == buscado) return true;
+        for (Producto item : contenido) {
+            if (item instanceof Paquete) {
+                Paquete otro = (Paquete) item;
+                if (otro.contienePaquete(buscado)) return true;
             }
         }
         return false;
@@ -47,7 +48,9 @@ public class Paquete implements Producto {
                 throw new IllegalArgumentException("No puedes crear paquetes circulares");
             }
         }
-
+        for (Producto item : contenido) {
+            if (item == producto) throw new IllegalArgumentException("Este producto ya fue incluido.");
+        }
         for(Actividad nueva: producto.actividades()){
             for(Actividad actual: actividades()){
                 if(nueva.getCodigo().equals(actual.getCodigo())){
@@ -55,9 +58,6 @@ public class Paquete implements Producto {
                 }
             }
         }
-
-
-
         contenido.add(producto);
     }
 
@@ -66,8 +66,7 @@ public class Paquete implements Producto {
         for(Producto p : contenido){
             precio += p.precioPersona();
         }
-        BigDecimal descuentoAplicable = new BigDecimal("100").subtract(descuento);
-        return (precio - descuentoAplicable.doubleValue()) / 100;
+        return (precio * (100 - descuento)) / 100;
 
     }
 
@@ -76,27 +75,48 @@ public class Paquete implements Producto {
     }
 
     public void setCodigo(String codigo) {
-        this.codigo = codigo;
+        if (codigo == null || codigo.trim().isEmpty()) {
+            throw new IllegalArgumentException("El codigo es obligatorio");
+        }
+        this.codigo = codigo.trim();
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        if (nombre == null || nombre.trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre es obligatorio");
+        }
+        this.nombre = nombre.trim();
     }
 
-    public BigDecimal descuento() {
+    public double getDescuento() {
         return descuento;
     }
 
-    public void setDescuento(BigDecimal descuento) {
+    public void setDescuento(double descuento) {
+        if(descuento < 0 || descuento > 20){
+            throw new IllegalArgumentException("El descuento debe estar entre 0 y 20.");
+        }
         this.descuento = descuento;
     }
 
-    public List<Producto> getContenido() {
-        return contenido;
+    public ArrayList<Producto> getContenido() {
+        return new ArrayList<>(contenido);
     }
 
-    public void setContenido(List<Producto> contenido) {
-        this.contenido = contenido;
+    public void setContenido(ArrayList<Producto> contenido) {
+        if(contenido == null){
+            throw new IllegalArgumentException("La lista no puede ser nula.");
+        }
+        ArrayList<Producto> anterior = this.contenido;
+        this.contenido = new ArrayList<>();
+        try {
+            for(Producto producto : contenido) {
+                agregarProducto(producto);
+            }
+        } catch (IllegalArgumentException e) {
+            this.contenido = anterior;
+            throw e;
+        }
     }
 
     public int duracion(){
@@ -106,18 +126,17 @@ public class Paquete implements Producto {
         }
         return horas;
     }
-    @Override
     public String codigo() {
         return codigo; }
-    @Override
-    public String nombre() { return nombre; }
+    public String nombre() {
+        return nombre; }
 
-    @Override
-    public List<Actividad> actividades() {
-        List<Actividad> lista = new ArrayList<>();
+    public ArrayList<Actividad> actividades() {
+        ArrayList<Actividad> lista = new ArrayList<>();
         for (Producto producto : contenido) { lista.addAll(producto.actividades()); }
         return lista;
     }
+
 
     @Override
     public String toString() {
