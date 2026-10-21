@@ -139,7 +139,6 @@ RF-03: registrar actividades con código, nombre, municipio, duración en horas,
 # Diagrama de clases UML
 
 ![](/docs/UML.jpg)
-
 # Video Youtube
 
-### https://youtu.be/NkDhGdIr5T8
+### https://youtu.be/5sCDoFsHO54
