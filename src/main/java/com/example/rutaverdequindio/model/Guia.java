@@ -7,19 +7,24 @@ public class Guia {
 
     private String identificacion;
     private String nombre;
-    private List<String> idiomasDominados;
+    private ArrayList<String> idiomasDominados;
     private String telefono;
     private double tarifaxdia;
 
-    Guia(String identificacion, String nombre, String idiomasDominados, String telefono, double tarifaxdia) {
+    public Guia(String identificacion, String nombre, String idiomas, String telefono, double tarifaxdia) {
+        if(identificacion == null || identificacion.trim().isEmpty() || nombre == null || nombre.trim().isEmpty()
+                || idiomas == null || idiomas.trim().isEmpty() || telefono == null || telefono.trim().isEmpty() ){
+            throw new IllegalArgumentException("Datos del guia incorrectos");
+        }
         this.identificacion = identificacion;
         this.nombre = nombre;
-        this.idiomasDominados = new ArrayList<>();
         this.telefono = telefono;
         this.tarifaxdia = tarifaxdia;
+        setIdiomasDominados(idiomas);
     }
 
     public boolean habla(String idioma){
+        if(idioma == null || idioma.trim().isEmpty()){ return false; }
         for(String idiomaGuia: idiomasDominados){
             if(idiomaGuia.equalsIgnoreCase(idioma)){
                 return true;
@@ -44,12 +49,23 @@ public class Guia {
         this.nombre = nombre;
     }
 
-    public String getIdiomasDominados() {
-        return idiomasDominados;
+    public ArrayList<String> getIdiomasDominados() {
+        return new ArrayList<>(idiomasDominados);
     }
 
-    public void setIdiomasDominados(String idiomasDominados) {
-        this.idiomasDominados = idiomasDominados;
+    public void setIdiomasDominados(String idiomas) {
+        idiomasDominados = new ArrayList<>();
+        if(idiomas != null && !idiomas.trim().isEmpty()){
+            String[] separados = idiomas.split(",");
+            for(String idioma: separados){
+                if(!idioma.trim().isEmpty()){
+                    idiomasDominados.add(idioma.trim());
+                }
+            }
+        }
+        if(idiomasDominados != null && !idiomasDominados.isEmpty()){
+            throw new IllegalArgumentException("Ingresa los idiomas del guia");
+        }
     }
 
     public String getTelefono() {
@@ -65,7 +81,9 @@ public class Guia {
     }
 
     public void setTarifaxdia(double tarifaxdia) {
-        this.tarifaxdia = tarifaxdia;
+        if(tarifaxdia >= 0){
+            this.tarifaxdia = tarifaxdia;
+        }
     }
 
 

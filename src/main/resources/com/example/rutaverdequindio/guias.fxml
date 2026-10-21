@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.rutaverdequindio.controller.GuiasController" spacing="12" style="-fx-padding: 18;">
+    <Label text="Registro de guías" style="-fx-font-size: 15px; -fx-font-weight: bold;"/>
+    <HBox spacing="9" alignment="CENTER_LEFT">
+        <TextField fx:id="identificacion" promptText="Identificación" prefWidth="175"/>
+        <TextField fx:id="nombre" promptText="Nombre" prefWidth="175"/>
+        <TextField fx:id="telefono" promptText="Teléfono" prefWidth="175"/>
+    </HBox>
+    <HBox spacing="9" alignment="CENTER_LEFT">
+        <TextField fx:id="idiomas" promptText="Idiomas separados por comas" prefWidth="175"/>
+        <TextField fx:id="tarifa" promptText="Tarifa por día en pesos" prefWidth="175"/>
+    </HBox>
+    <HBox spacing="9" alignment="CENTER_LEFT">
+        <Button text="Guardar / actualizar" onAction="#guardar"/>
+        <Button text="Eliminar seleccionado" onAction="#eliminar"/>
+        <Button text="Limpiar" onAction="#limpiar"/>
+        <Button text="Actualizar lista" onAction="#actualizar"/>
+    </HBox>
+    <Label text="Ejemplo de idiomas: español, inglés"/>
+    <ListView fx:id="lista" onMouseClicked="#seleccionar" VBox.vgrow="ALWAYS"/>
+</VBox>

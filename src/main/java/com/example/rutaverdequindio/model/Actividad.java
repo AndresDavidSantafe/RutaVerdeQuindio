@@ -1,21 +1,27 @@
 package com.example.rutaverdequindio.model;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.ArrayList;
 
 public class Actividad implements Producto {
     private String codigo;
     private String nombre;
     private String municipio;
-    private double duracion; // en horas
+    private int duracion; // en horas
     private double precioxpersona;
     private int cupomaximo;
     private Dificultad dificultad;
     private Estado estado;
 
-    public Actividad(String codigo, String nombre, String municipio, double duracion, double precioxpersona, int cupomaximo, Dificultad dificultad, Estado estado) {
+    public Actividad(String codigo, String nombre, String municipio, int duracion, double precioxpersona, int cupomaximo, Dificultad dificultad, Estado estado) {
         if (precioxpersona < 0) {
             throw new IllegalArgumentException("El precio por persona no puede ser negativo.");
+        }
+        if (codigo == null || codigo.trim().isEmpty() || nombre == null || nombre.trim().isEmpty()
+                || municipio == null || municipio.trim().isEmpty()) {
+            throw new IllegalArgumentException("Complete el código, nombre y municipio.");
+        }
+        if (duracion < 1 || precioxpersona < 0 || cupomaximo < 1 || dificultad == null || estado == null) {
+            throw new IllegalArgumentException("Revise duración, precio, cupo, dificultad y estado.");
         }
         this.codigo = codigo;
         this.nombre = nombre;
@@ -45,16 +51,14 @@ public class Actividad implements Producto {
 
     @Override
     public int duracion() {
-
-        return (int) Math.round(duracion);
+        return duracion;
     }
 
-    @Override
-    public List<Actividad> actividades() {
-
-        return Collections.singletonList(this);
+    public ArrayList<Actividad> actividades() {
+        ArrayList<Actividad> lista = new ArrayList<>();
+        lista.add(this);
+        return lista;
     }
-
 
     public String getCodigo() {
         return codigo;
@@ -84,7 +88,7 @@ public class Actividad implements Producto {
         return duracion;
     }
 
-    public void setDuracion(double duracion) {
+    public void setDuracion(int duracion) {
         this.duracion = duracion;
     }
 

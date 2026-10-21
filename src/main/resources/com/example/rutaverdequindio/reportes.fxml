@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.rutaverdequindio.controller.ReportesController" spacing="12" style="-fx-padding: 18;">
+    <Label text="Reporte de reservas confirmadas" style="-fx-font-size: 15px; -fx-font-weight: bold;"/>
+    <HBox spacing="9" alignment="CENTER_LEFT">
+        <TextField fx:id="inicio" promptText="Inicio aaaa-MM-dd" prefWidth="175"/>
+        <TextField fx:id="fin" promptText="Fin aaaa-MM-dd" prefWidth="175"/>
+        <Button text="Consultar" onAction="#consultar"/>
+    </HBox>
+    <TextArea fx:id="salida" editable="false" wrapText="true" VBox.vgrow="ALWAYS"/>
+    <Label text="Solo se incluyen viajes dentro del periodo, con fecha inicial y final incluidas."/>
+</VBox>

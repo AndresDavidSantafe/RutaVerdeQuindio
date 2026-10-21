@@ -7,29 +7,20 @@ public class ValidadorLuhn {
         }
 
         String numLimpio = tarjeta.replace(" ", "");
-
-        if (numLimpio.length() >= 13 && numLimpio.length() <= 19) {
-            int acumulador = 0;
-
-            for (int i = numLimpio.length() - 2; i >= 0; i -= 2) {
-                int val = Character.getNumericValue(numLimpio.charAt(i));
-                int result = val * 2;
-                if (result > 9) {
-                    acumulador += result - 9;
-                } else {
-                    acumulador += result;
-                }
+        if (numLimpio.length() < 13 || numLimpio.length() > 19) {return false;}
+        int suma = 0;
+        boolean duplicar = false;
+        for (int i = numLimpio.length() - 1; i >= 0; i--) {
+            char letra = numLimpio.charAt(i);
+            if (letra < '0' || letra > '9') {return false;}
+            int digito = letra - '0';
+            if (duplicar) {
+                digito = digito * 2;
+                if (digito > 9) digito = digito - 9;
             }
-
-            for (int i = numLimpio.length() - 1; i >= 0; i -= 2) {
-                int val = Character.getNumericValue(numLimpio.charAt(i));
-                acumulador += val;
-            }
-
-            if (acumulador % 10 == 0) {
-                return true;
-            }
+            suma = suma + digito;
+            duplicar = !duplicar;
         }
-        return false;
+        return suma % 10 == 0;
     }
 }

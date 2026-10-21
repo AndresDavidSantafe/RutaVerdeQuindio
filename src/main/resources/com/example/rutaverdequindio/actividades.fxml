@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.rutaverdequindio.controller.ActividadesController" spacing="12"
+      style="-fx-padding: 18;">
+    <Label text="Actividades turísticas" style="-fx-font-size: 15px; -fx-font-weight: bold;"/>
+    <HBox spacing="9" alignment="CENTER_LEFT">
+        <TextField fx:id="codigo" promptText="Código" prefWidth="175"/>
+        <TextField fx:id="nombre" promptText="Nombre de actividad" prefWidth="175"/>
+        <TextField fx:id="municipio" promptText="Municipio" prefWidth="175"/>
+    </HBox>
+    <HBox spacing="9" alignment="CENTER_LEFT">
+        <TextField fx:id="horas" promptText="Duración (horas)" prefWidth="175"/>
+        <TextField fx:id="precio" promptText="Precio por persona" prefWidth="175"/>
+        <TextField fx:id="cupo" promptText="Cupo máximo por día" prefWidth="175"/>
+    </HBox>
+    <HBox spacing="9" alignment="CENTER_LEFT">
+        <Label text="Dificultad:"/>
+        <ComboBox fx:id="dificultad" prefWidth="145"/>
+        <Label text="Estado:"/>
+        <ComboBox fx:id="estado" prefWidth="145"/>
+    </HBox>
+    <HBox spacing="9" alignment="CENTER_LEFT">
+        <Button text="Crear actividad" onAction="#guardar"/>
+        <Button text="Cambiar estado" onAction="#cambiarEstado"/>
+        <Button text="Eliminar" onAction="#eliminar"/>
+        <Button text="Limpiar" onAction="#limpiar"/>
+        <Button text="Actualizar lista" onAction="#actualizar"/>
+    </HBox>
+    <Label text="Para suspender una actividad: selecciónela, cambie el estado y pulse Cambiar estado."/>
+    <ListView fx:id="lista" onMouseClicked="#seleccionar" VBox.vgrow="ALWAYS"/>
+</VBox>

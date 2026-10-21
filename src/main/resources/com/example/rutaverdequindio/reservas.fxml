@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.rutaverdequindio.controller.ReservasController" spacing="12" style="-fx-padding: 18;">
+    <Label text="Reservas y pagos" style="-fx-font-size: 15px; -fx-font-weight: bold;"/>
+    <HBox spacing="9" alignment="CENTER_LEFT">
+        <Label text="Cliente:"/>
+        <ComboBox fx:id="clientes" prefWidth="260"/>
+        <Label text="Producto:"/>
+        <ComboBox fx:id="productos" prefWidth="280"/>
+    </HBox>
+    <HBox spacing="9" alignment="CENTER_LEFT">
+        <TextField fx:id="fecha" promptText="Fecha aaaa-MM-dd" prefWidth="175"/>
+        <TextField fx:id="viajeros" promptText="Viajeros 1 a 15" prefWidth="175"/>
+        <Label text="Guía opcional:"/>
+        <ComboBox fx:id="guias" prefWidth="260"/>
+    </HBox>
+    <HBox spacing="9" alignment="CENTER_LEFT">
+        <CheckBox fx:id="transporte" text="Transporte ($35.000 por viajero)"/>
+        <CheckBox fx:id="seguro" text="Seguro ($15.000 por viajero)"/>
+    </HBox>
+    <HBox spacing="9" alignment="CENTER_LEFT">
+        <TextField fx:id="tarjeta" promptText="Número de tarjeta" prefWidth="175"/>
+        <Label text="Voucher:"/>
+        <ComboBox fx:id="canal" prefWidth="160"/>
+    </HBox>
+    <TextArea fx:id="observaciones" promptText="Observaciones (alergias, alimentación, movilidad...)" prefRowCount="2"
+              wrapText="true"/>
+    <HBox spacing="9" alignment="CENTER_LEFT">
+        <Button text="Actualizar clientes y productos" onAction="#actualizar"/>
+        <Button text="Calcular total" onAction="#calcular"/>
+        <Button text="Confirmar y cobrar" onAction="#confirmar"/>
+        <Button text="Ver voucher seleccionado" onAction="#verVoucher"/>
+    </HBox>
+    <TextArea fx:id="resultado" editable="false" wrapText="true" prefRowCount="7" VBox.vgrow="ALWAYS"/>
+    <Label text="Reservas confirmadas:"/>
+    <ListView fx:id="lista" prefHeight="100"/>
+</VBox>
