@@ -55,7 +55,7 @@ public class Guia {
 
     public void setIdiomasDominados(String idiomas) {
         idiomasDominados = new ArrayList<>();
-        if(idiomas != null && !idiomas.trim().isEmpty()){
+        if(idiomas != null && idiomas.trim().isEmpty()){
             String[] separados = idiomas.split(",");
             for(String idioma: separados){
                 if(!idioma.trim().isEmpty()){
@@ -84,6 +84,11 @@ public class Guia {
         if(tarifaxdia >= 0){
             this.tarifaxdia = tarifaxdia;
         }
+    }
+
+    @Override
+    public String toString() {
+        return nombre + " - " + identificacion;
     }
 
 
