@@ -79,7 +79,7 @@ public class Reserva {
         }
 
         public Reserva construir() {
-            if (guia != null && !guia.habla(cliente.getIdiomaPreferido())) {
+            if (guia == null && !guia.habla(cliente.getIdiomaPreferido())) {
                 throw new IllegalArgumentException("El guía no habla el idioma del cliente");
             }
             ArrayList<Actividad> actividades = producto.actividades();
